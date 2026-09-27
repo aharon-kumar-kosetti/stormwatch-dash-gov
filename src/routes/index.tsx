@@ -46,6 +46,7 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <a className="skip-link" href="#nowcast">Skip to weather outlook</a>
       <div className="utility-bar">
         <div className="site-container flex items-center justify-between gap-3 py-2 text-xs">
           <span>भारत · India <span className="mx-2 opacity-40">|</span> Public weather information</span>
@@ -54,11 +55,16 @@ function Index() {
       </div>
 
       <header className="border-b border-border bg-background">
-        <div className="site-container flex min-h-21 items-center justify-between gap-4 py-3">
+        <div className="site-container header-inner">
           <a href="#top" className="flex min-w-0 items-center gap-3 sm:gap-4" aria-label="StormWatch India home">
             <div className="brand-mark"><CloudLightning size={29} strokeWidth={1.8} /></div>
             <div className="min-w-0"><div className="brand-hindi" lang="hi">तूफान निगरानी · भारत</div><div className="brand-title">StormWatch India</div><div className="brand-subtitle">ILLUSTRATIVE WEATHER OUTLOOK · NOT A GOVERNMENT SERVICE</div></div>
           </a>
+          <form className="header-search" role="search" onSubmit={(event) => { event.preventDefault(); document.getElementById("alerts")?.scrollIntoView({ behavior: "smooth" }); }}>
+            <label className="sr-only" htmlFor="header-location-search">Search sample alerts by location</label>
+            <input id="header-location-search" placeholder="Search locations..." value={query} onChange={(event) => { setQuery(event.target.value); setSelected(null); }} />
+            <Button type="submit" variant="ghost" size="icon" aria-label="Search locations"><Search size={18} /></Button>
+          </form>
           <div className="hidden items-center gap-7 lg:flex">
             <div className="border-r border-border pr-7 text-right"><div className="text-xs font-semibold text-foreground">Weather information</div><div className="mt-1 text-xs text-muted-foreground">India-wide illustrative outlook</div></div>
             <Button asChild variant="outline" size="sm" className="h-10 border-primary text-primary hover:bg-secondary"><a href="#alerts">View alerts <ArrowRight size={15} /></a></Button>
@@ -100,7 +106,7 @@ function Index() {
         </div></section>
 
         <section id="nowcast" className="site-container py-12 md:py-16">
-          <div className="section-heading"><div><div className="section-kicker">STORM NOWCAST</div><h2 className="font-display text-3xl font-semibold text-foreground md:text-4xl">Weather across India</h2><p className="mt-3 text-sm text-muted-foreground">Explore a sample regional outlook for developing storm conditions.</p></div><div className="sample-badge"><span className="status-dot" /> SAMPLE DATA · NOT LIVE</div></div>
+          <div className="section-heading"><div><div className="section-kicker">STORM NOWCAST</div><h2 className="font-display text-3xl font-semibold text-primary md:text-4xl">Weather across India</h2><p className="mt-3 text-sm text-muted-foreground">Explore a sample regional outlook for developing storm conditions.</p></div><div className="sample-badge"><span className="status-dot" /> SAMPLE DATA · NOT LIVE</div></div>
 
           <div className="forecast-toolbar">
             <div className="toolbar-group"><label htmlFor="region-select">REGION</label><div className="select-wrap"><MapPin size={16} /><select id="region-select" value={region} onChange={(event) => { setRegion(event.target.value as Region); setSelected(null); }}><option>All India</option><option>West India</option><option>North India</option><option>South India</option><option>East India</option></select><ChevronDown size={15} /></div></div>
