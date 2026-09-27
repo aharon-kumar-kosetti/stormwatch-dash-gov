@@ -13,3 +13,4 @@
 
 - The first screen is a single-page illustrative India storm nowcasting dashboard with no live weather feed; labeling prevents sample conditions from being mistaken for official warnings.
 - The India outlook uses a locally served, simplified state-boundary SVG; it keeps the map available without third-party tile or map services.
+- The masthead borrows the white, blue-rule and bilingual visual language of Indian public-service sites but uses a custom weather mark and prominent independent-demo labeling to avoid implying government affiliation.

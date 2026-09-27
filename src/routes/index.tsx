@@ -48,16 +48,16 @@ function Index() {
     <div className="min-h-screen bg-background text-foreground">
       <div className="utility-bar">
         <div className="site-container flex items-center justify-between gap-3 py-2 text-xs">
-          <span>Public weather information <span className="mx-2 opacity-40">|</span> India</span>
-          <div className="flex items-center gap-4"><span className="hidden sm:inline">For awareness and preparedness</span><span className="utility-pill">DEMONSTRATION SITE</span></div>
+          <span>भारत · India <span className="mx-2 opacity-40">|</span> Public weather information</span>
+          <div className="flex items-center gap-4"><span className="hidden sm:inline">For awareness and preparedness</span><span className="utility-pill">INDEPENDENT DEMONSTRATION</span></div>
         </div>
       </div>
 
       <header className="border-b border-border bg-background">
         <div className="site-container flex min-h-21 items-center justify-between gap-4 py-3">
           <a href="#top" className="flex min-w-0 items-center gap-3 sm:gap-4" aria-label="StormWatch India home">
-            <div className="brand-mark"><CloudLightning size={27} strokeWidth={1.8} /></div>
-            <div className="min-w-0"><div className="brand-title">StormWatch <span>India</span></div><div className="brand-subtitle">STORM NOWCASTING OUTLOOK</div></div>
+            <div className="brand-mark"><CloudLightning size={29} strokeWidth={1.8} /></div>
+            <div className="min-w-0"><div className="brand-hindi" lang="hi">तूफान निगरानी · भारत</div><div className="brand-title">StormWatch India</div><div className="brand-subtitle">ILLUSTRATIVE WEATHER OUTLOOK · NOT A GOVERNMENT SERVICE</div></div>
           </a>
           <div className="hidden items-center gap-7 lg:flex">
             <div className="border-r border-border pr-7 text-right"><div className="text-xs font-semibold text-foreground">Weather information</div><div className="mt-1 text-xs text-muted-foreground">India-wide illustrative outlook</div></div>
@@ -69,11 +69,11 @@ function Index() {
 
       <nav className="nav-band" aria-label="Main navigation">
         <div className={`site-container nav-inner ${menuOpen ? "nav-open" : ""}`}>
-          <a href="#top" className="nav-link active" onClick={() => setMenuOpen(false)}>Overview</a>
+          <a href="#top" className="nav-link active" onClick={() => setMenuOpen(false)}>Home</a>
           <a href="#nowcast" className="nav-link" onClick={() => setMenuOpen(false)}>Nowcast map</a>
           <a href="#alerts" className="nav-link" onClick={() => setMenuOpen(false)}>Regional alerts</a>
           <a href="#safety" className="nav-link" onClick={() => setMenuOpen(false)}>Safety guidance</a>
-          <span className="ml-auto hidden items-center gap-2 text-xs text-primary-foreground/80 lg:flex"><span className="status-dot" /> Illustrative outlook · Not live</span>
+          <span className="ml-auto hidden items-center gap-2 text-xs text-muted-foreground lg:flex"><span className="status-dot" /> Illustrative outlook · Not live</span>
         </div>
       </nav>
 
@@ -85,7 +85,7 @@ function Index() {
           <div className="hero-shade" />
           <div className="site-container relative z-10 flex h-full flex-col justify-center py-12 text-primary-foreground">
             <div className="hero-eyebrow"><span className="status-dot" /> WEATHER AWARENESS, AT A GLANCE</div>
-            <h1 id="hero-title" className="mt-5 max-w-2xl font-display text-4xl font-bold leading-[1.08] sm:text-5xl lg:text-[56px]">Know what the<br />storm may bring.</h1>
+            <h1 id="hero-title" className="mt-5 max-w-2xl font-display text-4xl font-bold leading-[1.08] sm:text-5xl lg:text-[56px]">Storm nowcasting<br />outlook for India</h1>
             <p className="mt-5 max-w-lg text-sm leading-7 text-primary-foreground/85 sm:text-base">A clear view of developing thunderstorms, rainfall and regional conditions across India.</p>
             <a href="#nowcast" className="mt-7 inline-flex w-fit items-center gap-2 border-b border-primary-foreground/70 pb-1 text-sm font-semibold hover:border-primary-foreground">Explore the outlook <ArrowDown size={16} /></a>
           </div>
