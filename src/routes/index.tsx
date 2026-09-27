@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { AlertTriangle, ArrowDown, ArrowRight, Bell, Check, ChevronDown, Clock3, CloudLightning, CloudRain, Download, ExternalLink, Info, MapPin, Menu, Search, ShieldCheck, Waves, Wind, X } from "lucide-react";
+import { AlertTriangle, ArrowDown, ArrowRight, Bell, ChevronDown, Clock3, CloudLightning, CloudRain, ExternalLink, Info, MapPin, Menu, Search, Waves, Wind, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import stormCoast from "@/assets/storm-coast.jpg";
 
