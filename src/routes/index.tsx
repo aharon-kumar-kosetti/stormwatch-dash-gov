@@ -42,7 +42,6 @@ function Index() {
   const [selected, setSelected] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [noticeOpen, setNoticeOpen] = useState(true);
-  const [subscribed, setSubscribed] = useState(false);
   const visibleAlerts = alerts.filter((alert, index) => (window !== "Next 1 hour" || index < 2) && (region === "All India" || alert.region === region) && `${alert.place} ${alert.kind}`.toLowerCase().includes(query.toLowerCase()));
 
   return (
