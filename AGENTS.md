@@ -8,3 +8,8 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Project decisions
+
+- The first screen is a single-page illustrative India storm nowcasting dashboard with no live weather feed; labeling prevents sample conditions from being mistaken for official warnings.
+- The India outlook uses a locally served, simplified state-boundary SVG; it keeps the map available without third-party tile or map services.
