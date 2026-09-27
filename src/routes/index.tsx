@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { AlertTriangle, ArrowDown, ArrowRight, Bell, ChevronDown, Clock3, CloudLightning, CloudRain, ExternalLink, Info, MapPin, Menu, Search, Waves, Wind, X } from "lucide-react";
+import { AlertTriangle, ArrowDown, ArrowRight, ChevronDown, Clock3, CloudLightning, CloudRain, ExternalLink, Info, MapPin, Menu, Search, Waves, Wind, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import stormCoast from "@/assets/storm-coast.jpg";
 
@@ -20,7 +20,6 @@ export const Route = createFileRoute("/")({
 
 type Region = "All India" | "West India" | "North India" | "South India" | "East India";
 type Window = "Next 1 hour" | "Next 3 hours" | "Next 6 hours";
-type Layer = "Warnings" | "Rainfall" | "Wind";
 
 const alerts = [
   { place: "Mumbai & Konkan coast", region: "West India", level: "Orange alert", kind: "Thunderstorm, heavy rain", icon: CloudLightning, detail: "Thunderstorms with intense spells of rain and gusty winds are possible. Avoid low-lying roads and exposed coastal areas." },
@@ -39,13 +38,12 @@ const safety = [
 function Index() {
   const [region, setRegion] = useState<Region>("All India");
   const [window, setWindow] = useState<Window>("Next 3 hours");
-  const [layer, setLayer] = useState<Layer>("Warnings");
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [noticeOpen, setNoticeOpen] = useState(true);
   const [subscribed, setSubscribed] = useState(false);
-  const visibleAlerts = alerts.filter((alert) => (region === "All India" || alert.region === region) && `${alert.place} ${alert.kind}`.toLowerCase().includes(query.toLowerCase()));
+  const visibleAlerts = alerts.filter((alert, index) => (window !== "Next 1 hour" || index < 2) && (region === "All India" || alert.region === region) && `${alert.place} ${alert.kind}`.toLowerCase().includes(query.toLowerCase()));
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -64,7 +62,7 @@ function Index() {
           </a>
           <div className="hidden items-center gap-7 lg:flex">
             <div className="border-r border-border pr-7 text-right"><div className="text-xs font-semibold text-foreground">Weather information</div><div className="mt-1 text-xs text-muted-foreground">India-wide illustrative outlook</div></div>
-            <Button variant="outline" size="sm" onClick={() => setSubscribed(!subscribed)} className="h-10 border-primary text-primary hover:bg-secondary"><Bell size={15} />{subscribed ? "Updates on" : "Get updates"}</Button>
+            <Button asChild variant="outline" size="sm" className="h-10 border-primary text-primary hover:bg-secondary"><a href="#alerts">View alerts <ArrowRight size={15} /></a></Button>
           </div>
           <Button variant="ghost" size="icon" className="lg:hidden" aria-label={menuOpen ? "Close menu" : "Open menu"} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</Button>
         </div>
@@ -108,13 +106,13 @@ function Index() {
           <div className="forecast-toolbar">
             <div className="toolbar-group"><label htmlFor="region-select">REGION</label><div className="select-wrap"><MapPin size={16} /><select id="region-select" value={region} onChange={(event) => { setRegion(event.target.value as Region); setSelected(null); }}><option>All India</option><option>West India</option><option>North India</option><option>South India</option><option>East India</option></select><ChevronDown size={15} /></div></div>
             <div className="toolbar-group"><label htmlFor="window-select">TIME WINDOW</label><div className="select-wrap"><Clock3 size={16} /><select id="window-select" value={window} onChange={(event) => setWindow(event.target.value as Window)}><option>Next 1 hour</option><option>Next 3 hours</option><option>Next 6 hours</option></select><ChevronDown size={15} /></div></div>
-            <div className="toolbar-group layer-group"><span className="toolbar-label">MAP LAYER</span><div className="layer-options" role="group" aria-label="Map layer">{(["Warnings", "Rainfall", "Wind"] as const).map((option) => <Button key={option} variant={layer === option ? "default" : "ghost"} size="sm" onClick={() => setLayer(option)} aria-pressed={layer === option}>{option}</Button>)}</div></div>
+            <div className="toolbar-context">Select a region and time window to browse sample alerts.</div>
           </div>
 
           <div className="outlook-layout">
             <div className="map-panel">
-              <div className="map-topline"><div><span className="section-kicker">NATIONAL VIEW</span><h3 className="font-display text-xl font-semibold">{layer === "Warnings" ? "Storm warning outlook" : layer === "Rainfall" ? "Rainfall outlook" : "Wind outlook"}</h3></div><span className="text-xs text-muted-foreground">{window} · {region}</span></div>
-              <div className={`map-stage map-${layer.toLowerCase()}`}><div className="map-watermark">ARABIAN SEA</div><img src="/india-alert-map.svg" alt="Illustrative state-level India map showing sample orange and yellow warning regions" width={510} height={550} className="india-map" /><div className="map-watermark right">BAY OF BENGAL</div><div className="map-note">Indicative map for visual demonstration only.<br />Boundaries are illustrative.</div></div>
+              <div className="map-topline"><div><span className="section-kicker">NATIONAL VIEW</span><h3 className="font-display text-xl font-semibold">Storm warning outlook</h3></div><span className="text-xs text-muted-foreground">{window} · {region}</span></div>
+              <div className="map-stage"><div className="map-watermark">ARABIAN SEA</div><img src="/india-alert-map.svg" alt="Illustrative state-level India map showing sample orange and yellow warning regions" width={510} height={550} className="india-map" /><div className="map-watermark right">BAY OF BENGAL</div><div className="map-note">Indicative map for visual demonstration only.<br />Map shading does not change with filters.</div></div>
               <div className="map-legend"><span className="legend-title">KEY</span><span><i className="legend-swatch orange" /> Orange alert</span><span><i className="legend-swatch yellow" /> Yellow watch</span><span><i className="legend-swatch clear" /> No sample alert</span></div>
             </div>
 
